@@ -10,5 +10,4 @@ class RestProjectDemoApplicationTests {
 	void contextLoads() {
 	}
 
-
 }
