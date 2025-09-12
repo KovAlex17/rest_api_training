@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  app:
+    image: "myapp"
+    container_name: app
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_URL=jddocker-compose stop
+        bc:postgresql://db:5432/postgres
+    depends_on:
+      - db
+  db:
+    image: 'postgres'
+    container_name: db
+    expose:
+      - '5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
