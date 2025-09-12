@@ -1,26 +1,26 @@
-package com.kovAlex.rest_project_demo.dto;
+package com.kovAlex.rest_project_demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
 @Table(name = "cats")
 public class Cat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(unique = true)
     private String name;
 
     private int age;
 
-    @Column(name = "mass", nullable = false)
+    @Column(name = "mass")
     private int weight;
 
     public Cat( String name, int age, int weight) {

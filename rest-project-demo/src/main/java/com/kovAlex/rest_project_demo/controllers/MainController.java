@@ -1,13 +1,17 @@
 package com.kovAlex.rest_project_demo.controllers;
 
-import com.kovAlex.rest_project_demo.dto.Cat;
+import com.kovAlex.rest_project_demo.dto.CatDTO;
+import com.kovAlex.rest_project_demo.entity.Cat;
 import com.kovAlex.rest_project_demo.repository.CatRepo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "main_methods")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -20,9 +24,20 @@ public class MainController {
         return "pong";
     }
 
+    @Operation(
+            summary = "Кладет нового кота в базу",
+            description = "Получает CatDTO, билдером собирает и сохраняет сущность в базу"
+    )
     @PostMapping("/api/add")
-    public void addCat(@RequestBody Cat cat){
-        log.info("New row: " + catRepo.save(cat));
+    public void addCat(@RequestBody CatDTO catDTO){
+        log.info(
+                "New row: " + catRepo.save(
+                        Cat.builder()
+                            .name(catDTO.getName())
+                            .weight(catDTO.getWeight())
+                            .age(catDTO.getAge())
+                            .build())
+        );
     }
 
     @GetMapping("/api/all")
